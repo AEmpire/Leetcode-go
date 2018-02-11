@@ -19,7 +19,7 @@ func myAtoi(str string) int {
 			break
 		}
 	}
-	
+
 	if array[index] == '-' {
 		flag = -1
 		index++
@@ -45,7 +45,7 @@ func myAtoi(str string) int {
 			result = result*10 + int(array[i]) - 48
 		}
 	}
-	if flag * result < 0 {
+	if flag*result < 0 {
 		result = -result
 	}
 	if result > 2147483647 {

@@ -12,10 +12,10 @@ func convert(s string, numRows int) string {
 	gap := numRows*2 - 2
 	if gap == 0 {
 		numCols = len(array)
-	}else {
+	} else {
 		numCols = length/gap + 1
 	}
-	
+
 	index := 0
 loop:
 	for j := 0; j < numCols; j++ {
