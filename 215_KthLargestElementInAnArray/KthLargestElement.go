@@ -10,15 +10,15 @@ func findKthLargest(nums []int, k int) int {
 	flag := nums[left]
 	i, j := left, right
 	p := 0
-	for j >= i{
-		for j >= p && nums[j] <= flag{
+	for j >= i {
+		for j >= p && nums[j] <= flag {
 			j--
 		}
 		if j >= p {
 			nums[p] = nums[j]
 			p = j
 		}
-		for i <= p && nums[i] >= flag{
+		for i <= p && nums[i] >= flag {
 			i++
 		}
 		if i <= p {
@@ -38,9 +38,7 @@ func findKthLargest(nums []int, k int) int {
 	return nums[k]
 }
 
-
-
-func main()  {
-	ans := findKthLargest([]int{3,2,1,5,6,4}, 2)
+func main() {
+	ans := findKthLargest([]int{3, 2, 1, 5, 6, 4}, 2)
 	fmt.Println(ans)
 }
