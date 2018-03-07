@@ -26,6 +26,7 @@ select *
 select *
   from Trips as T left join Users as U on (T.Client_Id = U.Users_Id);
 
+explain
 select T.Request_at as Day, ROUND(count(T.Status <> 'completed' or NULL)/count(*), 2) as 'Cancellation Rate'
   from Trips as T left join Users as U on (T.Client_Id = U.Users_Id)
  where U.Banned = 'No' and (T.Request_at = '2013-10-01' or T.Request_at = '2013-10-02' or T.Request_at = '2013-10-03')

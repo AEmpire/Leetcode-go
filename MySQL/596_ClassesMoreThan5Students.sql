@@ -16,6 +16,7 @@ select distinct C.class
    from courses
   where class = C.class) >= 5;
 
+explain
 SELECT
     class
 FROM
