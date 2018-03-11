@@ -19,6 +19,35 @@ func (t *TreeNode) leftAppend(val int) {
 	t.Left = &TreeNode{val, nil, nil}
 }
 
+func postorderTraversal(root *TreeNode) []int {
+	var cur int
+	var stack []*TreeNode
+	var result []int
+
+	if root == nil {
+		return result
+	}
+	stack = append(stack, root)
+	for {
+		for stack[cur].Left != nil {
+			stack = append(stack, stack[cur].Left)
+			stack[cur].Left = nil
+			cur++
+		}
+		for stack[cur].Right != nil {
+			stack = append(stack, stack[cur].Right)
+			stack[cur].Right = nil
+			cur++
+		}
+		result = append(result, stack[cur].Val)
+		stack = stack[:cur]
+		cur--
+		if cur == -1 {
+			return result
+		}
+	}
+}
+
 func inorderTraversal(root *TreeNode) []int {
 
 	var cur int
@@ -31,6 +60,7 @@ func inorderTraversal(root *TreeNode) []int {
 	for {
 		for stack[cur].Left != nil {
 			stack = append(stack, stack[cur].Left)
+			stack[cur].Left = nil
 			cur++
 		}
 		result = append(result, stack[cur].Val)
@@ -39,10 +69,9 @@ func inorderTraversal(root *TreeNode) []int {
 		} else {
 			stack = stack[:cur]
 			cur--
-			if len(stack) == 0 {
+			if cur == -1 {
 				return result
 			}
-			stack[cur].Left = nil
 		}
 	}
 }
@@ -55,5 +84,5 @@ func main() {
 	root.Left.rigthAppend(4)
 	root.Right.rigthAppend(5)
 
-	fmt.Println(inorderTraversal(root))
+	fmt.Println(postorderTraversal(root))
 }
