@@ -76,6 +76,31 @@ func inorderTraversal(root *TreeNode) []int {
 	}
 }
 
+func morrisTraversal(root *TreeNode) []int {
+	var prev, cur *TreeNode
+	var result []int
+	cur = root
+	for cur != nil {
+		if cur.Left == nil {
+			result = append(result, cur.Val)
+			cur = cur.Right
+		}else {
+			prev = cur.Left
+			for prev.Right != nil && prev.Right != cur {
+				prev = prev.Right
+			}
+			if prev.Right == nil {
+				prev.Right = cur
+				cur = cur.Left
+			}else {
+				result = append(result, cur.Val)
+				cur = cur.Right
+			}
+		}
+	}
+	return result
+}
+
 func main() {
 	root := &TreeNode{1, nil, nil}
 	root.rigthAppend(5)
@@ -83,6 +108,5 @@ func main() {
 	root.Left.leftAppend(4)
 	root.Left.rigthAppend(4)
 	root.Right.rigthAppend(5)
-
-	fmt.Println(postorderTraversal(root))
+	fmt.Println(morrisTraversal(root))
 }
